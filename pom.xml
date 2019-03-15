@@ -8,5 +8,62 @@
     <artifactId>unit-benchmarks</artifactId>
     <version>0.1</version>
 
+    <dependencies>
+        <!-- benchmark tool -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>1.21</version>
+        </dependency>
+    </dependencies>
 
+    <build>
+        <plugins>
+            <!-- code analysis tool -->
+            <plugin>
+                <groupId>com.qulice</groupId>
+                <artifactId>qulice-maven-plugin</artifactId>
+                <version>0.18.2</version>
+                <configuration>
+                    <excludes combine.children="append">
+                        <exclude>findbugs:.*</exclude>
+                        <exclude>duplicatefinder:.*</exclude>
+                        <exclude>dependencies:.*</exclude>
+                    </excludes>
+                    <license>file:${basedir}/LICENSE</license>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- to set the java version to 10-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.10</source>
+                    <target>1.10</target>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
