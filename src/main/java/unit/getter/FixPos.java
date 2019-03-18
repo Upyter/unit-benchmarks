@@ -22,7 +22,7 @@
 package unit.getter;
 
 /**
- * @since 1.0
+ * @since 0.1
  */
 public class FixPos implements Pos {
     private final int x;

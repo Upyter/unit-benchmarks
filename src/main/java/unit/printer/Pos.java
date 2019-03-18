@@ -23,6 +23,9 @@ package unit.printer;
 
 import java.util.function.BiFunction;
 
+/**
+ * @since 0.1
+ */
 public interface Pos {
     <R> R result(BiFunction<Integer, Integer, R> target);
 }

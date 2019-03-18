@@ -23,6 +23,9 @@ package unit.printer;
 
 import java.util.function.BiFunction;
 
+/**
+ * @since 0.1
+ */
 public class FixPos implements Pos {
     private final int x;
     private final int y;

@@ -34,18 +34,17 @@ import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.runner.RunnerException;
 
 /*
-Benchmark      Mode  Cnt         Score         Error  Units
-Test.getter   thrpt    5  46737378,777 ±  198278,130  ops/s
-Test.printer  thrpt    5  45811861,590 ± 2072623,675  ops/s
+Benchmark                           Mode  Cnt         Score         Error  Units
+FixedPrinterVsFixedGetter.getter   thrpt    5  45186231,792 ± 5979393,200  ops/s
+FixedPrinterVsFixedGetter.printer  thrpt    5  45812599,673 ±  305753,309  ops/s
  */
-
 /**
- * A benchmark to compare {@link unit.getter.FixPos} with
- * {@link unit.printer.FixPos}.
- * @since 0.1
+ * A benchmark to compare {@link unit.printer.SuppliedFixPos} with
+ * {@link unit.getter.SuppliedFixPos}. 
+ * @since 0.2
  */
-@State(Scope.Benchmark)
-public class FixedPrinterVsFixedGetter {
+@State(Scope.Thread)
+public class SupplierBenchmark {
     private unit.getter.Pos getter;
     private unit.printer.Pos printer;
 
@@ -57,8 +56,8 @@ public class FixedPrinterVsFixedGetter {
 
     @Setup
     public void setup() {
-        getter = new unit.getter.FixPos(24, 439);
-        printer = new unit.printer.FixPos(53, 548);
+        getter = new unit.getter.SuppliedFixPos(() -> random(), () -> random());
+        printer = new unit.printer.SuppliedFixPos(() -> random(), () -> random());
     }
 
     @Benchmark
@@ -77,5 +76,9 @@ public class FixedPrinterVsFixedGetter {
         printer.result(
             (x, y) -> Math.nextAfter(y, Math.sin(x))
         );
+    }
+
+    private static int random() {
+        return (int) (Math.random() * 10000);
     }
 }

@@ -24,7 +24,7 @@ package unit.getter;
 import java.util.function.Supplier;
 
 /**
- * @since 1.0
+ * @since 0.1
  */
 public class SuppliedFixPos implements Pos {
     private final Supplier<Integer> x;

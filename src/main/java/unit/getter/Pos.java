@@ -21,6 +21,9 @@
 
 package unit.getter;
 
+/**
+ * @since 0.1
+ */
 public interface Pos {
     int x();
     int y();
